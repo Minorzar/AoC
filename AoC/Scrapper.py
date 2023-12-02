@@ -2,34 +2,31 @@ import os
 
 inputPath = os.path.join(os.getcwd(), r"Input\input_file.txt")
 
-rMax = 12
-gMax = 13
-bMax = 14
 
-def find_color(color):
+def find_color(color, rMax, gMax, bMax):
     if color.find("red") != -1:
         color = color.replace("red", '')
         if int(color) > rMax:
-            return False
-        return True
+            return int(color), gMax, bMax
+        return rMax, gMax, bMax
 
     if color.find("blue") != -1:
         color = color.replace("blue", '')
         if int(color) > bMax:
-            return False
-        return True
+            return rMax, gMax, int(color)
+        return rMax, gMax, bMax
 
     if color.find("green") != -1:
         color = color.replace("green", '')
         if int(color) > gMax:
-            return False
-        return True
+            return rMax, int(color), bMax
+        return rMax, gMax, bMax
 
 def extract():
     games = []
     gameSet = []
     colors = []
-    count = 0
+    power = []
 
     with open(inputPath, "r") as file:
         lines = file.readlines()
@@ -48,12 +45,13 @@ def extract():
             colors[i].append(gSet.split(','))       # get a list of colors
 
     for (idGame, game) in enumerate(colors):
-        bol = True
+        rMax = 0
+        gMax = 0
+        bMax = 0
         for gSet in game:
             for color in gSet:
-                bol = bol and find_color(color)
+                (rMax, gMax, bMax) = find_color(color, rMax, gMax, bMax)
 
-        if bol:
-            count += (idGame + 1)
+        power.append(rMax*gMax*bMax)
 
-    return count
+    return sum(power)

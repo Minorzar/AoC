@@ -26,3 +26,10 @@ This is the repository of my work on the Advent of Code 2023 code
     check if it's greater or not than one of the limits.
 
     The code works and I got the star.
+
+# Puzzle 2
+
+    Same as before but we just modify the maximum value got for each game instead of them being fixed. I also
+    change the bol to be a return of the modified maximum values then I put the power of each game in an array.
+
+    The code works and I got the star.
