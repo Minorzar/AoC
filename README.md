@@ -17,3 +17,12 @@ This is the repository of my work on the Advent of Code 2023 code
     index and do the same operation.
 
     The code works and I got the star.
+
+## Day 2
+
+# Puzzle 1
+
+    The idea is to decompose each game into pieces (each set of cube) then to get the value before the color and
+    check if it's greater or not than one of the limits.
+
+    The code works and I got the star.

@@ -1,30 +1,59 @@
 import os
 
-cwd = os.getcwd()
-inputFile = r"Input\input_file.txt"
-num = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+inputPath = os.path.join(os.getcwd(), r"Input\input_file.txt")
 
-inputPath = os.path.join(cwd, inputFile)
+rMax = 12
+gMax = 13
+bMax = 14
 
-def counter():
+def find_color(color):
+    if color.find("red") != -1:
+        color = color.replace("red", '')
+        if int(color) > rMax:
+            return False
+        return True
+
+    if color.find("blue") != -1:
+        color = color.replace("blue", '')
+        if int(color) > bMax:
+            return False
+        return True
+
+    if color.find("green") != -1:
+        color = color.replace("green", '')
+        if int(color) > gMax:
+            return False
+        return True
+
+def extract():
+    games = []
+    gameSet = []
+    colors = []
     count = 0
+
     with open(inputPath, "r") as file:
         lines = file.readlines()
 
     for line in lines:
-        numbers = []
-        for n in num:
-            index = line.find(n)
-            while index != -1:
-                numbers.append((index, num.index(n)))
-                index = line.find(n, index + 1)
-        for (i, c) in enumerate(line):
-            try:
-                number = int(c)
-                numbers.append((i, number))
-            except:
-                continue
-        numbers = sorted(numbers, key=lambda x: x[0])
-        count += numbers[0][1]*10 + numbers[-1][1]
+        line = line.split(' ')
+        line = line[2:]
+        games.append(''.join(line))        # get games as a string
 
-    print("The number is: ", count)
+    for game in games:
+        gameSet.append(game.split(';'))              # get a list of the set of cube
+
+    for (i, game) in enumerate(gameSet):
+        colors.append([])
+        for gSet in game:
+            colors[i].append(gSet.split(','))       # get a list of colors
+
+    for (idGame, game) in enumerate(colors):
+        bol = True
+        for gSet in game:
+            for color in gSet:
+                bol = bol and find_color(color)
+
+        if bol:
+            count += (idGame + 1)
+
+    return count
