@@ -33,3 +33,12 @@ This is the repository of my work on the Advent of Code 2023 code
     change the bol to be a return of the modified maximum values then I put the power of each game in an array.
 
     The code works and I got the star.
+
+## Day 2
+
+# Puzzle 1
+    
+    The idea is to look at every number in the file, add them in a string if they are in a row. When the number
+    is "over", we check if there is any symbol near it and add it or not to the total.
+
+    The code works and I got the star.

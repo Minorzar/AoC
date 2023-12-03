@@ -3,55 +3,54 @@ import os
 inputPath = os.path.join(os.getcwd(), r"Input\input_file.txt")
 
 
-def find_color(color, rMax, gMax, bMax):
-    if color.find("red") != -1:
-        color = color.replace("red", '')
-        if int(color) > rMax:
-            return int(color), gMax, bMax
-        return rMax, gMax, bMax
+symbols = set('*$+#-/%&=@')
 
-    if color.find("blue") != -1:
-        color = color.replace("blue", '')
-        if int(color) > bMax:
-            return rMax, gMax, int(color)
-        return rMax, gMax, bMax
 
-    if color.find("green") != -1:
-        color = color.replace("green", '')
-        if int(color) > gMax:
-            return rMax, int(color), bMax
-        return rMax, gMax, bMax
+def get_neighbors(matrix, row, col):
+    neighbors = []
+
+    index = [
+        (-1, -1), (-1, 0),  (-1, 1),
+        (0,  -1),           (0, 1),
+        (1,  -1), (1, 0),   (1, 1)
+    ]
+
+    for i, j in index:
+        new_row, new_col = row + i, col + j
+
+        if 0 <= new_row < len(matrix) and 0 <= new_col < len(matrix[0]):
+            neighbors.append(matrix[new_row][new_col])
+
+    return neighbors
+
+def isValid(matrix, number, x, y):
+    n = len(number)
+    for i in range(n):
+        neig = get_neighbors(matrix, x, y-i)
+
+        for sym in symbols:
+            if sym in neig:
+                print(number)
+                return int(number)
+
+    return 0
 
 def extract():
-    games = []
-    gameSet = []
-    colors = []
-    power = []
+
+    count = 0
+    num = ""
 
     with open(inputPath, "r") as file:
-        lines = file.readlines()
+        data = file.readlines()
 
-    for line in lines:
-        line = line.split(' ')
-        line = line[2:]
-        games.append(''.join(line))        # get games as a string
+    for (x, line) in enumerate(data):
+        for (y, car) in enumerate(line):
+            try:
+                n = int(car)
+                num += car
+            except:
+                if num != "":
+                    count += isValid(data, num, x, y-1)
+                    num = ""
 
-    for game in games:
-        gameSet.append(game.split(';'))              # get a list of the set of cube
-
-    for (i, game) in enumerate(gameSet):
-        colors.append([])
-        for gSet in game:
-            colors[i].append(gSet.split(','))       # get a list of colors
-
-    for (idGame, game) in enumerate(colors):
-        rMax = 0
-        gMax = 0
-        bMax = 0
-        for gSet in game:
-            for color in gSet:
-                (rMax, gMax, bMax) = find_color(color, rMax, gMax, bMax)
-
-        power.append(rMax*gMax*bMax)
-
-    return sum(power)
+    return count
