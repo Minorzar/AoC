@@ -34,7 +34,7 @@ This is the repository of my work on the Advent of Code 2023 code
 
     The code works and I got the star.
 
-## Day 2
+## Day 3
 
 # Puzzle 1
     
@@ -49,4 +49,14 @@ This is the repository of my work on the Advent of Code 2023 code
     in an array. I then use a dictionary to be able to get the multiple number near a gear then multiply them if
     their are more thant 1 number for a gear/
 
-    The code works and I got the start.
+    The code works and I got the star.
+
+## Day 4
+
+# Puzzle 1
+
+    The idea is to decompose the card into two array: one with the number to check and the other with the winning
+    numbers. The to check if any of the winning number is in the number to check (or the inverse) and then compute
+    the card value.
+
+    The code works and I got the star.
