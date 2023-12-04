@@ -60,3 +60,11 @@ This is the repository of my work on the Advent of Code 2023 code
     the card value.
 
     The code works and I got the star.
+
+# Puzzle 2
+
+    The idea is to create an array that comport all the number of card we have (set to one by default), then to 
+    calculate the number of card we have each time we won (for one card the to multiply by the number of instance
+    of the card).
+
+    The code works and I got the star.

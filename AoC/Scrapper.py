@@ -12,6 +12,8 @@ def extract():
     with open(inputPath, "r") as file:
         cards = file.readlines()
 
+    totalCard = [1 for _ in range(len(cards))]
+
     for card in cards:
         cardValue = []
         cardWinning = []
@@ -31,12 +33,12 @@ def extract():
         cardValue.pop(0)    # remove Card n:
         allCardSplit.append((cardValue, cardWinning))
 
-    for card in allCardSplit:
-        matching = 0
+    for (index, card) in enumerate(allCardSplit):
+        cardIndex = index + 1
         for el in card[0]:
             if el in card[1]:
-                matching += 1
+                totalCard[cardIndex] += 1*totalCard[index]
+                cardIndex += 1
 
-        total += 2**(matching-1)*(matching != 0)
 
-    return int(total)
+    return int(sum(totalCard))
