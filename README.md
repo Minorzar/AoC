@@ -42,3 +42,11 @@ This is the repository of my work on the Advent of Code 2023 code
     is "over", we check if there is any symbol near it and add it or not to the total.
 
     The code works and I got the star.
+
+# Puzzle 2
+
+    The idea is to get all occurence of number near a so called gear. After that get the whole number and put it
+    in an array. I then use a dictionary to be able to get the multiple number near a gear then multiply them if
+    their are more thant 1 number for a gear/
+
+    The code works and I got the start.
